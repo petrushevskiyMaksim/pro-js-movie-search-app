@@ -1,0 +1,145 @@
+body {
+	font-family: Inter, serif;
+	font-size: 30px;
+	color: rgba(0, 0, 0, 1);
+}
+
+.movie-app {
+	padding: 100px 200px 100px 200px;
+}
+
+.movie-app__search {
+	display: flex;
+	column-gap: 25px;
+	margin-bottom: 50px;
+	padding-left: 35px;
+}
+
+.movie-app__input {
+	width: 500px;
+	padding: 10px 15px;
+	font-size: 32px;
+	border: 1px solid rgba(0, 0, 0, 1);
+}
+
+.movie-app__button {
+	display: inline-block;
+	width: 250px;
+	padding: 10px;
+	font-size: 32px;
+	color: #fff;
+	background-color: rgba(0, 148, 255, 1);
+}
+
+.movie-app__button:hover,
+.movie-app__button:focus {
+	background-color: rgba(0, 0, 0, 1);
+}
+
+.movie-app__list {
+	display: flex;
+	flex-direction: column;
+	row-gap: 25px;
+}
+.movie-app__item {
+	display: flex;
+	column-gap: 65px;
+}
+
+.link-movie {
+	width: 660px;
+	padding: 40px 35px 25px 35px;
+	border-radius: 35px;
+	overflow: hidden;
+}
+
+.link-movie:hover {
+	background-color: rgba(217, 217, 217, 1);
+}
+
+.link-movie__poster {
+	max-width: 100px;
+	font-size: 18px;
+	object-fit: cover;
+	object-position: center;
+}
+
+.link-movie__title {
+	margin-bottom: 5px;
+}
+
+.link-movie__title a {
+	font-size: 40px;
+	font-weight: 700;
+	color: rgba(0, 0, 0, 1);
+}
+.link-movie__year {
+	margin-bottom: 20px;
+}
+
+.link-movie__year a {
+	color: rgba(0, 148, 255, 1);
+	font-size: 25px;
+}
+.link-movie__type a {
+	color: rgba(0, 0, 0, 1);
+}
+
+/* =======================================LABEL_MOVIE_PAGE_STYLE================================================== */
+
+.movie {
+	padding: 60px 30px 60px 170px;
+}
+
+.movie__link-back {
+	display: inline-block;
+	margin-bottom: 115px;
+	font-size: 40px;
+	font-weight: 700;
+	color: rgba(0, 0, 0, 1);
+	transition: color 0.3s ease-in-out;
+}
+
+.movie__link-back:hover {
+	color: rgba(0, 0, 0, 0.5);
+}
+
+.movie__link-back::before {
+	content: '<-';
+	margin-right: 10px;
+}
+
+.movie__card {
+	margin-bottom: 70px;
+}
+
+.card-movie {
+	display: flex;
+	column-gap: 90px;
+}
+
+.info-movie {
+	display: flex;
+	flex-direction: column;
+	row-gap: 15px;
+}
+
+.info-movie div {
+	display: flex;
+	column-gap: 25px;
+}
+
+.info-movie a {
+	color: rgba(0, 148, 255, 1);
+}
+
+.info-movie__title {
+	margin-bottom: 15px;
+	font-weight: 700;
+	font-size: 50px;
+}
+
+.card-movie__description-title {
+	margin-bottom: 20px;
+	padding-left: 20px;
+}

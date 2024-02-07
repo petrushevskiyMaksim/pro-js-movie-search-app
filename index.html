@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Practic</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
+			rel="stylesheet"
+		/>
+		<link rel="stylesheet" href="./css/reset.css" />
+		<link rel="stylesheet" href="./css/style.css" />
+	</head>
+	<body>
+		<div class="movie-app">
+			<div class="movie-app__search">
+				<input
+					id="inputText"
+					type="text"
+					class="movie-app__input"
+					placeholder="Название фильма"
+				/>
+				<button id="buttonSearch" class="movie-app__button" type="submit">
+					Найти
+				</button>
+			</div>
+			<ul id="movieList" class="movie-app__list">
+				<!-- <li class="movie-app__item link-movie">
+					<a
+						class="link-movie__link-wrapper"
+						target="_blank"
+						href="./label_movie.html"
+					>
+						<img
+							class="link-movie__poster"
+							src="${newRes.Poster}"
+							alt="логотип фильма ${newRes.Title}"
+						/>
+						<div class="link-movie__wrapper-data">
+							<p class="link-movie__title">
+								<a href="./label_movie.html">${newRes.Title}</a>
+							</p>
+							<p class="link-movie__year">
+								<a href="#">${newRes.Year}</a>
+							</p>
+							<p class="link-movie__type">
+								<a class="link-movie__type" href="#">${newRes.Type}</a>
+							</p>
+						</div>
+					</a>
+				</li> -->
+			</ul>
+		</div>
+		<script type="module" src="./js/script.js"></script>
+	</body>
+</html>
