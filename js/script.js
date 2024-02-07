@@ -15,7 +15,7 @@ const movies = [];
 function getDataMovies() {
 	const valueInput = inputTextNode.value;
 
-	const url = `http://www.omdbapi.com/?s=${valueInput}&apikey=2e022356`;
+	const url = `https://www.omdbapi.com/?s=${valueInput}&apikey=2e022356`;
 
 	fetch(url)
 		.then(response => response.json())
