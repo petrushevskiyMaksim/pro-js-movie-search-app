@@ -4,39 +4,47 @@ const TYPE_MOVIE = 'movie';
 const MOVIE = 'Фильм';
 const TYPE_SERIES = 'series';
 const SERIES = 'Сериал';
+const API_KEY = '&apikey=2e022356';
+const NON_MOVIE = 'Фильмы не найдены';
 
 const inputTextNode = document.getElementById('inputText');
 const buttonSearchNode = document.getElementById('buttonSearch');
 const movieListNode = document.getElementById('movieList');
 const linkNode = document.getElementById('link');
 
-const movies = [];
+const getNameMovieFromUser = () => {
+	const valueInput = inputTextNode.value.trim();
 
-function getDataMovies() {
-	const valueInput = inputTextNode.value;
+	if (valueInput === '') {
+		return (movieListNode.innerText = 'Фильмы не найдены');
+	}
 
-	const url = `https://www.omdbapi.com/?s=${valueInput}&apikey=2e022356`;
+	return valueInput;
+};
+
+function getDataMovies(valueInput) {
+	valueInput = getNameMovieFromUser();
+
+	const url = `https://www.omdbapi.com/?s=${valueInput}${API_KEY}`;
 
 	fetch(url)
 		.then(response => response.json())
 		.then(result => {
-			const res = result['Search'];
-			console.log(res);
+			const resArr = result['Search'];
 
-			const newRes = res[0];
-			console.log(newRes);
+			const resObj = resArr[0];
 
-			getMovieHTML(newRes);
+			createMovieHTML(resObj);
 
-			render(res);
+			renderList(resArr);
 		})
 		.catch(error => console.log(error));
 }
 
-function getMovieHTML(newRes) {
-	const TYPE_IF_MOVIE = newRes.Type === TYPE_MOVIE ? MOVIE : '';
-	const TYPE_IF_SERIES = newRes.Type === TYPE_SERIES ? SERIES : '';
-	const TYPE_IF_GAME = newRes.Type === TYPE_GAME ? GAME : '';
+function createMovieHTML(resObj) {
+	const TYPE_IF_MOVIE = resObj.Type === TYPE_MOVIE ? MOVIE : '';
+	const TYPE_IF_SERIES = resObj.Type === TYPE_SERIES ? SERIES : '';
+	const TYPE_IF_GAME = resObj.Type === TYPE_GAME ? GAME : '';
 
 	return `<li class="movie-app__item link-movie">
 				<a
@@ -46,15 +54,15 @@ function getMovieHTML(newRes) {
 				>
 					<img
 						class="link-movie__poster"
-						src="${newRes.Poster}"
-						alt="логотип фильма ${newRes.Title}"
+						src="${resObj.Poster}"
+						alt="логотип фильма ${resObj.Title}"
 					/>
 					<div class="link-movie__wrapper-data">
 						<p class="link-movie__title">
-							<a href="http://img.omdbapi.com/?i=tt0232500&apikey=2e022356&" target="_blank">${newRes.Title}</a>
+							<a href="http://img.omdbapi.com/?i=tt0232500&apikey=2e022356&" target="_blank">${resObj.Title}</a>
 						</p>
 						<p class="link-movie__year">
-							<a href="#">${newRes.Year}</a>
+							<a href="#">${resObj.Year}</a>
 						</p>
 						<p class="link-movie__type">
 							<a class="link-movie__type" href="#">
@@ -68,11 +76,11 @@ function getMovieHTML(newRes) {
 			</li>`;
 }
 
-const render = res => {
+const renderList = resArr => {
 	movieListNode.innerHTML = '';
 
-	res.forEach(element => {
-		const html = getMovieHTML(element);
+	resArr.forEach(element => {
+		const html = createMovieHTML(element);
 		movieListNode.innerHTML += html;
 	});
 };
@@ -81,7 +89,6 @@ inputTextNode.addEventListener('input', () => {
 	getDataMovies();
 });
 
-movieListNode.addEventListener('click', () => {});
 // const params = new URLSearchParams(location.search);
 // console.log(params);
 
