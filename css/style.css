@@ -41,7 +41,8 @@ body {
 	flex-direction: column;
 	row-gap: 25px;
 }
-.movie-app__item {
+
+.link-movie__link-wrapper {
 	display: flex;
 	column-gap: 65px;
 }
@@ -66,22 +67,17 @@ body {
 
 .link-movie__title {
 	margin-bottom: 5px;
-}
-
-.link-movie__title a {
 	font-size: 40px;
 	font-weight: 700;
 	color: rgba(0, 0, 0, 1);
 }
+
 .link-movie__year {
 	margin-bottom: 20px;
+	color: rgba(0, 148, 255, 1);
 }
 
-.link-movie__year a {
-	color: rgba(0, 148, 255, 1);
-	font-size: 25px;
-}
-.link-movie__type a {
+.link-movie__type {
 	color: rgba(0, 0, 0, 1);
 }
 
@@ -129,7 +125,7 @@ body {
 	column-gap: 25px;
 }
 
-.info-movie a {
+.info-movie p {
 	color: rgba(0, 148, 255, 1);
 }
 
