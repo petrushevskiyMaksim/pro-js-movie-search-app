@@ -1,22 +1,17 @@
 const API_KEY = '2e022356';
 
-const movieListNode = document.getElementById('movieList');
+const params = new URLSearchParams(location.search);
+const apiId = params.get('id');
+
 const movieItem = document.getElementById('movie');
 
-export const getIdMovie = async () => {
-	const params = new URLSearchParams(location.search);
-	console.log(params);
-
-	const apiId = params.get('id');
-	console.log(apiId);
-
+export const getIdMovie = async apiId => {
 	try {
-		const result = await fetch(
-			`https://www.omdbapi.com/?i=${apiId}&apikey=${API_KEY}`
+		const res = await fetch(
+			`https://www.omdbapi.com/?apikey=${API_KEY}&i=${apiId}`
 		);
 
-		const movie = await result.json();
-		console.log(movie);
+		const movie = await res.json();
 
 		renderMovie(movie);
 	} catch (error) {
@@ -24,7 +19,7 @@ export const getIdMovie = async () => {
 	}
 };
 
-getIdMovie();
+getIdMovie(apiId);
 
 const renderMovie = movie => {
 	movieItem.insertAdjacentHTML(
