@@ -1,30 +1,30 @@
-const API_KEY = '2e022356';
+document.addEventListener('DOMContentLoaded', () => {
+	const API_KEY = '2e022356';
+	const params = new URLSearchParams(location.search);
+	const apiId = params.get('id');
 
-const params = new URLSearchParams(location.search);
-const apiId = params.get('id');
+	const movieItem = document.getElementById('movie');
 
-const movieItem = document.getElementById('movie');
+	const getIdMovie = async apiId => {
+		try {
+			const res = await fetch(
+				`https://www.omdbapi.com/?apikey=${API_KEY}&i=${apiId}`
+			);
 
-export const getIdMovie = async apiId => {
-	try {
-		const res = await fetch(
-			`https://www.omdbapi.com/?apikey=${API_KEY}&i=${apiId}`
-		);
+			const movie = await res.json();
 
-		const movie = await res.json();
+			renderMovie(movie);
+		} catch (error) {
+			console.log(error);
+		}
+	};
 
-		renderMovie(movie);
-	} catch (error) {
-		console.log(error);
-	}
-};
+	getIdMovie(apiId);
 
-getIdMovie(apiId);
-
-const renderMovie = movie => {
-	movieItem.insertAdjacentHTML(
-		'beforeend',
-		`<div class="movie__card card-movie">
+	const renderMovie = movie => {
+		movieItem.insertAdjacentHTML(
+			'beforeend',
+			`<div class="movie__card card-movie">
 				<div class="card-movie__poster">
 					<img class="card-movie__img" src="${movie.Poster}" alt="Картинка фильма ${movie.Title}" />
 				</div>
@@ -72,5 +72,6 @@ const renderMovie = movie => {
 					${movie.Plot}
 				</p>
 			</div>`
-	);
-};
+		);
+	};
+});

@@ -1,53 +1,50 @@
-import { getIdMovie } from './movie.js';
+document.addEventListener('DOMContentLoaded', () => {
+	const API_KEY = '2e022356';
+	const inputTextNode = document.getElementById('inputText');
+	const buttonSearchNode = document.getElementById('buttonSearch');
+	const movieListNode = document.getElementById('movieList');
 
-const API_KEY = '2e022356';
+	const getInputValue = () => inputTextNode.value;
 
-const inputTextNode = document.getElementById('inputText');
-const buttonSearchNode = document.getElementById('buttonSearch');
-const movieListNode = document.getElementById('movieList');
-const linkNode = document.getElementById('link');
+	const getClickUser = () => {
+		const inputValue = getInputValue();
 
-const getInputValue = () => inputTextNode.value;
+		checkInputValue(inputValue);
 
-const getClickUser = () => {
-	const inputValue = getInputValue();
+		getApiMovies(inputValue);
 
-	checkInputValue(inputValue);
+		clearInput();
+	};
 
-	getApiMovies(inputValue);
+	const checkInputValue = inputValue => {
+		return inputValue.trim().length !== 0;
+	};
 
-	clearInput();
-};
+	const getApiMovies = async inputValue => {
+		try {
+			const result = await fetch(
+				`https://www.omdbapi.com/?s=${inputValue}&apikey=${API_KEY}`
+			);
 
-const checkInputValue = inputValue => {
-	return inputValue.trim().length !== 0;
-};
+			const movies = await result.json();
+			console.log(movies);
 
-const getApiMovies = async inputValue => {
-	try {
-		const result = await fetch(
-			`https://www.omdbapi.com/?s=${inputValue}&apikey=${API_KEY}`
-		);
+			renderMovies(movies);
+		} catch (error) {
+			console.log(error);
+		}
+	};
 
-		const movies = await result.json();
-		console.log(movies);
+	const renderMovies = data => {
+		movieListNode.innerHTML = '';
 
-		renderMovies(movies);
-	} catch (error) {
-		console.log(error);
-	}
-};
+		if (data.Response === 'True') {
+			data.Search.forEach(movie => {
+				const TypeMovie = movie.Type === 'movie' ? 'Фильм' : '';
+				const TypeSeries = movie.Type === 'series' ? 'Сериал' : '';
+				const TypeGame = movie.Type === 'game' ? 'Игра' : '';
 
-const renderMovies = data => {
-	movieListNode.innerHTML = '';
-
-	if (data.Response === 'True') {
-		data.Search.forEach(movie => {
-			const TypeMovie = movie.Type === 'movie' ? 'Фильм' : '';
-			const TypeSeries = movie.Type === 'series' ? 'Сериал' : '';
-			const TypeGame = movie.Type === 'game' ? 'Игра' : '';
-
-			movieListNode.innerHTML += `<li class="movie-app__item link-movie">
+				movieListNode.innerHTML += `<li class="movie-app__item link-movie">
 				<a
 					class="link-movie__link-wrapper"
 					target="_blank"
@@ -71,18 +68,17 @@ const renderMovies = data => {
 					</div>
 				</a>
 			</li>`;
-		});
-	} else {
-		console.log('Нет фильмов');
-	}
-};
+			});
+		} else {
+			console.log('Нет фильмов');
+		}
+	};
 
-const clearInput = () => {
-	inputTextNode.value = '';
+	const clearInput = () => {
+		inputTextNode.value = '';
 
-	inputTextNode.focus();
-};
+		inputTextNode.focus();
+	};
 
-buttonSearchNode.addEventListener('click', getClickUser);
-
-
+	buttonSearchNode.addEventListener('click', getClickUser);
+});
